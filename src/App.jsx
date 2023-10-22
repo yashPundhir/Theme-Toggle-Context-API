@@ -1,12 +1,33 @@
-import "./App.css";
+import Card from "./components/Card";
+import { useState } from "react";
+import ThemeBtn from "./components/ThemeBtn";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
+	const [themeMode, setThemeMode] = useState("light");
+
+	const lightTheme = () => {
+		setThemeMode("light");
+	};
+
+	const darkTheme = () => {
+		setThemeMode("dark");
+	};
+
 	return (
-		<div className="bg-blue-400 p-10">
-			<h1 className="text-rose-500 font-semibold bg-slate-800 px-5 py-2 rounded-xl">
-				Theme Toggle
-			</h1>
-		</div>
+		<ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
+			<div className="flex flex-wrap min-h-screen items-center">
+				<div className="w-full">
+					<div className="w-full max-w-sm mx-auto flex justify-end mb-4">
+						<ThemeBtn />
+					</div>
+
+					<div className="w-full max-w-sm mx-auto">
+						<Card />
+					</div>
+				</div>
+			</div>
+		</ThemeProvider>
 	);
 }
 
